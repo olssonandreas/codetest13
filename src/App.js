@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 
-import Overview from './Overview';
+import Overview from 'pages/Overview';
 
 const Container = styled.div`
   display: flex;

@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import styled from 'styled-components';
-import { device } from './utils/breakPoints';
+import { device } from 'utils/breakPoints';
 
-import Card from './components/Card';
-import SearchBar from './components/SearchBar';
+import Card from 'components/Card';
+import Pagination from 'components/Pagination';
+import SearchBar from 'components/SearchBar';
 
 const CardWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(100, 1fr);
   grid-column-gap: 20px;
   grid-row-gap: 20px;
 
   @media ${device.tablet} {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(50, 1fr);
   }
 
   @media ${device.laptop} {
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(25, 1fr);
   }
 `;
 
@@ -65,31 +63,22 @@ export default () => {
     }
   }, [page, data]);
 
-  const goBack = () => page ? setPage(page -1) : null;
+  const goBack = () => page ? setPage(page -1): null;
 
   const goNext = () => (page * 100) + 100 > data.length ? null : setPage(page + 1);
-
-  const lastPageNum = () => {
-    if(data.length <= 100) return 1;
-
-    if(data.length % 10 === 0) return Math.round(data.length / 100);
-
-    return Math.round((data.length / 100) + 1);
-  }
 
   if (loading) return 'Loading ninjas...';
 
   return (
-  <div>
-    <div>Page {page + 1} / {lastPageNum()} </div>
-    <div onClick={goBack}>Back</div>
-    <div onClick={goNext}>Next</div>
+  <Fragment>
     <SearchBar />
+    <Pagination page={page} items={data.length} goBack={goBack} goNext={goNext} />
     <CardWrapper>
       { people.map(m =>
         <TabCard tabIndex="1"><Card {...m}/></TabCard>
       )}
     </CardWrapper>
-  </div>
+    <Pagination page={page} items={data.length} goBack={goBack} goNext={goNext} />
+  </Fragment>
   );
 };

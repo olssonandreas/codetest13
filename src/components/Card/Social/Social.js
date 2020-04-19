@@ -6,7 +6,6 @@ import {
   TiSocialTwitter,
 } from 'react-icons/ti';
 
-
 const SocialWrapper = styled.div`
   display: flex;
   flex-flow: wrap;
@@ -25,7 +24,6 @@ export default ({ gitHub, twitter, linkedIn  }) => {
       { gitHub && <a href={`https://github.com/${gitHub}`}><TiSocialGithub color="green" size="36px" /></a> }
       { linkedIn && <a href={`https://linkedin.com/${linkedIn}`}><TiSocialLinkedin color="green" size="36px" /></a>}
       { twitter && <a href={`https://twitter.com/${twitter}`}><TiSocialTwitter color="green" size="36px" /></a>}
-
     </SocialWrapper>
   );
 };

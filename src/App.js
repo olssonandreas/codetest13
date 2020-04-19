@@ -6,6 +6,8 @@ import {
   Route,
 } from "react-router-dom";
 
+import Overview from './Overview';
+
 const Container = styled.div`
   display: flex;
   flex-flow: column;
@@ -18,6 +20,7 @@ export default () => {
       <Router>
           <Switch>
             <Route path="/">
+              <Overview />
             </Route>
           </Switch>
       </Router>

@@ -1,6 +1,7 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, useCallback } from 'react';
 import styled from 'styled-components';
 import { device } from 'utils/breakPoints';
+import OverviewFetch from './OverviewFetch';
 
 import Card from 'components/Card';
 import Pagination from 'components/Pagination';
@@ -27,37 +28,27 @@ const TabCard = styled.div`
 }
 `;
 
-export default () => {
-  const [data, setData] = useState(null);
+const Overview = props => {
+  const PAGE_ITEMS = 100;
+  const { fetchedData  } = props;
+  const [data, setData] = useState(fetchedData);
   const [loading, setLoading]  = useState(true);
   const [page, setPage] = useState(0);
   const [people, setPeople] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const options = {
-        method: 'GET',
-        cors: 'no-cors',
-      };
-
-      const res = await fetch('https://api.tretton37.com/ninjas', options);
-      const json = await res.json();
-
-      setData([ ...json ]);
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if(data != null) setLoading(false);
-  }, [data]);
+    if(fetchedData != null) {
+      console.log('erwew');
+      setLoading(false);
+      setData(fetchedData);
+    }
+  }, [fetchedData]);
 
   useEffect(() => {
     if(data) {
       const people = [ ...data ];
-      const start = page ? page * 100 : 0
-      const end = page  ? (page * 100) + 100 : 100;
+      const start = page ? page * PAGE_ITEMS : 0
+      const end = page  ? (page * PAGE_ITEMS) + PAGE_ITEMS : PAGE_ITEMS;
       const displayedPeople = people.slice(start, end);
       setPeople(displayedPeople);
     }
@@ -65,20 +56,40 @@ export default () => {
 
   const goBack = () => page ? setPage(page -1): null;
 
-  const goNext = () => (page * 100) + 100 > data.length ? null : setPage(page + 1);
+  const goNext = () => (page * PAGE_ITEMS) + PAGE_ITEMS > data.length ? null : setPage(page + 1);
+
+  const clearSearch = () => {
+    setPage(0);
+    setData(fetchedData);
+  }
+
+  const searchValue = value => {
+    const search = value.toLowerCase().trim();
+    const filter = data.filter((f) => {
+      if(f.office.toLowerCase().indexOf(search) > -1)  return true;
+      if(f.name.toLowerCase().indexOf(search) > -1) return true;
+
+      return false;
+    });
+
+    setPage(0);
+    setData(filter);
+  };
 
   if (loading) return 'Loading ninjas...';
 
   return (
   <Fragment>
-    <SearchBar />
+    <SearchBar clearSearch={clearSearch} searchValue={searchValue} />
     <Pagination page={page} items={data.length} goBack={goBack} goNext={goNext} />
     <CardWrapper>
-      { people.map(m =>
-        <TabCard tabIndex="1"><Card {...m}/></TabCard>
+      { people.map((m,index) =>
+        <TabCard key={index} tabIndex="2"><Card {...m}/></TabCard>
       )}
     </CardWrapper>
     <Pagination page={page} items={data.length} goBack={goBack} goNext={goNext} />
   </Fragment>
   );
 };
+
+export default OverviewFetch(Overview);

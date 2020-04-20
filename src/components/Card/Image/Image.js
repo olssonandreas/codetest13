@@ -10,9 +10,8 @@ const ImageWrapper = styled.div`
 `;
 
 const Image = styled.img`
-  width: 150px;
+  width: 149px;
   height: 199px;
-  height: auto;
   display: block;
   margin: 0 auto;
 `;

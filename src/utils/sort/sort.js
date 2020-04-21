@@ -1,13 +1,13 @@
 
 const compare = key => {
   return (a, b) => {
-    const name1 = a[key].toLowerCase();
-    const name2 = b[key].toLowerCase();
+    const val1 = a[key].toLowerCase();
+    const val2 = b[key].toLowerCase();
 
     let comparison = 0;
-    if (name1 > name2) {
+    if (val1 > val2) {
       comparison = 1;
-    } else if (name1 < name2) {
+    } else if (val1 < val2) {
       comparison = -1;
     }
     return comparison;

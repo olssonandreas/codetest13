@@ -31,6 +31,7 @@ const TabCard = styled.div`
 
 const Overview = props => {
   const PAGE_ITEMS = 20;
+
   const { fetchedData } = props;
   const [data, setData] = useState(fetchedData);
   const [page, setPage] = useState(0);

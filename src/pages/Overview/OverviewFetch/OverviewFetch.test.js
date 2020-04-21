@@ -6,15 +6,12 @@ const MockedComponent = () => (
   <div data-testid="test">Test</div>
 );
 
-test('Overview components renders loading if no data', async () => {
+test('Overview components renders loading before fetch has resolved', async () => {
   global.fetch = jest.fn().mockImplementation(() => Promise.resolve( { json: () => [''], ok: true }));
 
   await act(async () => {
     const Component = OverviewFetch(MockedComponent);
     const { queryByTestId }  = render(<Component/>);
-
-    await waitForElement(() => queryByTestId('loading'));
-    
     expect(queryByTestId('loading')).toBeInTheDocument();
   });
 });

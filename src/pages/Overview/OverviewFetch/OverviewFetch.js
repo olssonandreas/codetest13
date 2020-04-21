@@ -53,8 +53,6 @@ export default Component => () => {
     );
   }
 
-  console.log('component', data);
-
   return (<Component fetchedData={data} />);
 };
 

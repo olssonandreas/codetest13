@@ -1,0 +1,22 @@
+version: "3"
+services:
+  app:
+    container_name: app
+    build: .
+    env_file:
+      - ./.env
+    volumes:
+      - build:/usr/src/app/build
+  server:
+    container_name: webserver
+    depends_on:
+      - app
+    restart: always
+    build: ./api
+    ports:
+      - 5000:5000
+    volumes:
+      - build:/usr/src/build
+    command: npm run start
+volumes:
+  build:

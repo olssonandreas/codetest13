@@ -1,3 +1,4 @@
 import Overview from './Overview';
+import OverviewFetch from './OverviewFetch';
 
-export default Overview;
+export default OverviewFetch(Overview);

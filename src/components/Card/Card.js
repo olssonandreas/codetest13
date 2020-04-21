@@ -24,7 +24,7 @@ const Text = styled.div`
 export default ({ name, imagePortraitUrl, office, gitHub, linkedIn, twitter }) => {
   return (
     <Card>
-      <Image imagePortraitUrl={imagePortraitUrl} ></Image>
+      <Image name={name} imagePortraitUrl={imagePortraitUrl} ></Image>
       <Text>{ name }</Text>
       <Text>{ office }</Text>
       <Social gitHub={gitHub} twitter={twitter} linkedIn={linkedIn} />

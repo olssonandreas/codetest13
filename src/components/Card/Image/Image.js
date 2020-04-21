@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import placeholder from './placeholder.png';
 
 const ImageWrapper = styled.div`
   width: 180px;
@@ -16,13 +17,13 @@ const Image = styled.img`
   margin: 0 auto;
 `;
 
-export default ({ imagePortraitUrl }) => {
+export default ({ imagePortraitUrl, name }) => {
   // TODO
-  if (!imagePortraitUrl) return 'Dummy image';
+  if (!imagePortraitUrl) return <img src={placeholder} alt="placeholder"></img>
 
   return (
     <ImageWrapper>
-      <Image src={imagePortraitUrl}></Image>
+      <Image alt={`Photo off ${name}`} src={imagePortraitUrl}></Image>
       </ImageWrapper>
   );
 };

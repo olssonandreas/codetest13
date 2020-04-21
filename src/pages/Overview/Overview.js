@@ -1,11 +1,12 @@
-import React, { useState, useEffect, Fragment, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { device } from 'utils/breakPoints';
-import OverviewFetch from './OverviewFetch';
+import { device } from 'utils';
+import { sort } from 'utils';
 
 import Card from 'components/Card';
 import Pagination from 'components/Pagination';
 import SearchBar from 'components/SearchBar';
+import Sort from 'components/Sort';
 
 const CardWrapper = styled.div`
   display: grid;
@@ -29,7 +30,7 @@ const TabCard = styled.div`
 `;
 
 const Overview = props => {
-  const PAGE_ITEMS = 100;
+  const PAGE_ITEMS = 20;
   const { fetchedData  } = props;
   const [data, setData] = useState(fetchedData);
   const [loading, setLoading]  = useState(true);
@@ -38,7 +39,6 @@ const Overview = props => {
 
   useEffect(() => {
     if(fetchedData != null) {
-      console.log('erwew');
       setLoading(false);
       setData(fetchedData);
     }
@@ -50,6 +50,7 @@ const Overview = props => {
       const start = page ? page * PAGE_ITEMS : 0
       const end = page  ? (page * PAGE_ITEMS) + PAGE_ITEMS : PAGE_ITEMS;
       const displayedPeople = people.slice(start, end);
+
       setPeople(displayedPeople);
     }
   }, [page, data]);
@@ -60,12 +61,12 @@ const Overview = props => {
 
   const clearSearch = () => {
     setPage(0);
-    setData(fetchedData);
-  }
+    setData([...fetchedData]);
+  };
 
   const searchValue = value => {
     const search = value.toLowerCase().trim();
-    const filter = data.filter((f) => {
+    const filter = fetchedData.filter((f) => {
       if(f.office.toLowerCase().indexOf(search) > -1)  return true;
       if(f.name.toLowerCase().indexOf(search) > -1) return true;
 
@@ -73,23 +74,33 @@ const Overview = props => {
     });
 
     setPage(0);
-    setData(filter);
+    setData([...filter]);
   };
 
-  if (loading) return 'Loading ninjas...';
+  const sortBy = value => {
+    const sortedData = sort(value, [...fetchedData]);
+    setData(sortedData);
+  };
+
+  const clearSort = () => {
+    setData([...fetchedData])
+  };
+
+  if (loading) return <div data-testid="loading">Loading ninjas...</div>;
 
   return (
-  <Fragment>
+  <div data-testid="overview">
     <SearchBar clearSearch={clearSearch} searchValue={searchValue} />
+    <Sort sortBy={sortBy} clearSort={clearSort} />
     <Pagination page={page} items={data.length} goBack={goBack} goNext={goNext} />
     <CardWrapper>
       { people.map((m,index) =>
-        <TabCard key={index} tabIndex="2"><Card {...m}/></TabCard>
+        <TabCard key={index} tabIndex="6"><Card {...m}/></TabCard>
       )}
     </CardWrapper>
-    <Pagination page={page} items={data.length} goBack={goBack} goNext={goNext} />
-  </Fragment>
+    <Pagination page={page} bottom={true} items={data.length} goBack={goBack} goNext={goNext} />
+  </div>
   );
 };
 
-export default OverviewFetch(Overview);
+export default Overview;

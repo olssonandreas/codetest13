@@ -21,9 +21,21 @@ const SocialWrapper = styled.div`
 export default ({ gitHub, twitter, linkedIn  }) => {
   return (
     <SocialWrapper>
-      { gitHub && <a href={`https://github.com/${gitHub}`}><TiSocialGithub color="green" size="36px" /></a> }
-      { linkedIn && <a href={`https://linkedin.com/${linkedIn}`}><TiSocialLinkedin color="green" size="36px" /></a>}
-      { twitter && <a href={`https://twitter.com/${twitter}`}><TiSocialTwitter color="green" size="36px" /></a>}
+      { gitHub &&
+      <a data-testid="github" href={`https://github.com/${gitHub}`}>
+        <TiSocialGithub color="green" size="36px" />
+      </a>
+      }
+      { linkedIn &&
+      <a data-testid="linkedin" href={`https://linkedin.com/${linkedIn}`}>
+        <TiSocialLinkedin color="green" size="36px" />
+      </a>
+      }
+      { twitter &&
+      <a data-testid="twitter" href={`https://twitter.com/${twitter}`}>
+        <TiSocialTwitter color="green" size="36px" />
+      </a>
+      }
     </SocialWrapper>
   );
 };

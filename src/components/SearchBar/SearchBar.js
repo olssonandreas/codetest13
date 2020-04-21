@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import useDebounce from 'utils/useDebounce';
+import { useDebounce } from 'utils';
 
 const SearchBar = styled.input`
   height: 80px;
-  border: 3px solid green;
+  width: 100%;
+  border: 1px solid green;
   font-size: 20px;
   color: #000;
   font-family: 'Quicksand', sans-serif;
@@ -12,8 +13,10 @@ const SearchBar = styled.input`
   font-style: italic;
   padding: 10px;
   font-weight: 300;
+  margin-bottom: 20px;
 
   &::placeholder{
+    font-style: normal;
     color: #000;
   }
 

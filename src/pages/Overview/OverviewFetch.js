@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 export default Component => props => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const options = {

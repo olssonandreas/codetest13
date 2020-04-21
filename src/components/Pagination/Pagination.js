@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
+
+import { calcPageLength } from 'utils';
 
 const PaginationWrapper = styled.div`
   display: flex;
@@ -9,21 +11,27 @@ const PaginationWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
-
 const buttonMixin = () => `
   cursor: pointer;
   width: 100px;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
   font-size: 14px;
-  text-decoration: underline;
+  &:focus {
+    outline: 0;
+    text-decoration: underline;
+    color: green;
+  }
 `;
 
-const LeftButton = styled.div`
+const LeftButton = styled.button`
   margin-right: auto;
   visibility: ${props => props.hide ? 'hidden;' : 'visible;'}
   ${buttonMixin}
 `;
 
-const RightButton = styled.div`
+const RightButton = styled.button`
   margin-left: auto;
   text-align: right;
   visibility: ${props => props.hide ? 'hidden;' : 'visible;'}
@@ -34,26 +42,30 @@ const PageCounter = styled.div`
   font-size: 14px;
 `;
 
-export default ({ goBack, goNext, page, items }) => {
+export default ({ goBack, goNext, page, items, bottom }) => {
   if(items === 0) return null;
 
-  const pageLength = () => {
-    if(!items) return 0;
-
-    if(items <= 100) return 1;
-
-    if(items === 0) return Math.round(items.length / 100);
-
-    return Math.round((items / 100) + 1);
-  };
-
-  const pages = pageLength();
+  const pageLength = useMemo(() => {
+    return calcPageLength(items, 20);
+  },[items]);
 
   return (
     <PaginationWrapper>
-      <LeftButton hide={page === 0} onClick={goBack}>Previous page</LeftButton>
-      <PageCounter>{ page + 1 } / { pages }</PageCounter>
-      <RightButton hide={page + 1 === pages} onClick={goNext}>Next page</RightButton>
+      <LeftButton
+        tabIndex={bottom ? '7' : '4'}
+        onKeyDown={(event) => event.keyCode === '13' ? goBack() : null}
+        hide={page === 0}
+        onClick={goBack}>
+        Previous page
+      </LeftButton>
+      <PageCounter>{ page + 1 } / { pageLength }</PageCounter>
+      <RightButton
+        tabIndex={bottom ? '8' : '5'}
+        hide={page + 1 === pageLength}
+        onClick={goNext}
+        onKeyDown={(event) => event.keyCode === '13' ? goNext() : null}>
+        Next page
+      </RightButton>
     </PaginationWrapper>
   );
 };

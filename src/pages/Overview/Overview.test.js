@@ -2,12 +2,6 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import Overview from './Overview';
 
-test('Overview components renders loading if no data', () => {
-  const { queryByTestId } = render(<Overview fetchedData={null} />);
-  const loadingElement = queryByTestId('loading');
-
-  expect(loadingElement).toBeInTheDocument();
-});
 
 test('Overview component renders overview when receiving data', () => {
   const mockedData = [

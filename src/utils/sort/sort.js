@@ -1,4 +1,3 @@
-
 const compare = key => {
   return (a, b) => {
     const val1 = a[key].toLowerCase();
@@ -17,6 +16,5 @@ const compare = key => {
 export default (sortKey, array) => {
   if(!Array.isArray(array)) return [];
 
-  const sortedArray = array.sort(compare(sortKey));
-  return sortedArray;
+  return array.sort(compare(sortKey));
 };

@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Link,
 } from "react-router-dom";
 
 import logo from 'assets/logo.svg';
@@ -32,17 +33,15 @@ const Header = styled.div`
 
 export default () => {
   return (
-    <Fragment>
-    <Header><img src={logo} alt="logo"></img></Header>
+    <Router>
+      <Header><Link to="/"><img src={logo} alt="logo"></img></Link></Header>
       <Container>
-        <Router>
-            <Switch>
-              <Route path="/">
-                <Overview />
-              </Route>
-            </Switch>
-        </Router>
+        <Switch>
+          <Route path="/">
+            <Overview />
+          </Route>
+        </Switch>
       </Container>
-    </Fragment>
+    </Router>
   );
 };

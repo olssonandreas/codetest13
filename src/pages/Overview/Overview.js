@@ -31,15 +31,13 @@ const TabCard = styled.div`
 
 const Overview = props => {
   const PAGE_ITEMS = 20;
-  const { fetchedData  } = props;
+  const { fetchedData } = props;
   const [data, setData] = useState(fetchedData);
-  const [loading, setLoading]  = useState(true);
   const [page, setPage] = useState(0);
   const [people, setPeople] = useState([]);
 
   useEffect(() => {
     if(fetchedData != null) {
-      setLoading(false);
       setData(fetchedData);
     }
   }, [fetchedData]);
@@ -54,6 +52,8 @@ const Overview = props => {
       setPeople(displayedPeople);
     }
   }, [page, data]);
+
+  if(!fetchedData) return null;
 
   const goBack = () => page ? setPage(page -1): null;
 
@@ -86,19 +86,22 @@ const Overview = props => {
     setData([...fetchedData])
   };
 
-  if (loading) return <div data-testid="loading">Loading ninjas...</div>;
-
   return (
   <div data-testid="overview">
     <SearchBar clearSearch={clearSearch} searchValue={searchValue} />
     <Sort sortBy={sortBy} clearSort={clearSort} />
-    <Pagination page={page} items={data.length} goBack={goBack} goNext={goNext} />
     <CardWrapper>
       { people.map((m,index) =>
         <TabCard key={index} tabIndex="6"><Card {...m}/></TabCard>
       )}
     </CardWrapper>
-    <Pagination page={page} bottom={true} items={data.length} goBack={goBack} goNext={goNext} />
+    <Pagination
+      page={page}
+      pageAmount={PAGE_ITEMS}
+      items={data.length}
+      goBack={goBack}
+      goNext={goNext}
+    />
   </div>
   );
 };

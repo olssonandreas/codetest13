@@ -42,25 +42,26 @@ const PageCounter = styled.div`
   font-size: 14px;
 `;
 
-export default ({ goBack, goNext, page, items, bottom }) => {
-  if(items === 0) return null;
+export default ({ goBack, goNext, page, items, pageAmount }) => {
+  if(items <= pageAmount) return null;
 
   const pageLength = useMemo(() => {
-    return calcPageLength(items, 20);
-  },[items]);
+    return calcPageLength(items, pageAmount);
+  },[items, pageAmount]);
+
 
   return (
-    <PaginationWrapper>
+    <PaginationWrapper data-testid="pagination">
       <LeftButton
-        tabIndex={bottom ? '7' : '4'}
+        tabIndex="7"
         onKeyDown={(event) => event.keyCode === '13' ? goBack() : null}
         hide={page === 0}
         onClick={goBack}>
         Previous page
       </LeftButton>
-      <PageCounter>{ page + 1 } / { pageLength }</PageCounter>
+      <PageCounter data-testid="counter">{ page + 1 } / { pageLength }</PageCounter>
       <RightButton
-        tabIndex={bottom ? '8' : '5'}
+        tabIndex="8"
         hide={page + 1 === pageLength}
         onClick={goNext}
         onKeyDown={(event) => event.keyCode === '13' ? goNext() : null}>

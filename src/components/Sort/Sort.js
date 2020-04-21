@@ -29,6 +29,7 @@ const SortByWrapper = styled.div`
   border: 1px solid green;
   border-radius: 3px;
   width: 100%;
+  margin-bottom: 20px;
  `;
 
 const SortOption = styled.button`

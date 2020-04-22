@@ -5,15 +5,14 @@ import { calcPageLength } from 'utils';
 
 const PaginationWrapper = styled.div`
   display: flex;
-  flex-flow: row;
-  justify-content: center;
+  flex-direction: row;
   margin-top: 20px;
   margin-bottom: 10px;
 `;
 
 const buttonMixin = () => `
   cursor: pointer;
-  width: 100px;
+  width: 33%;
   background-color: transparent;
   border: 0;
   padding: 0;
@@ -25,13 +24,13 @@ const buttonMixin = () => `
   }
 `;
 
-const LeftButton = styled.button`
+const LeftButton = styled.div`
   margin-right: auto;
   visibility: ${props => props.hide ? 'hidden;' : 'visible;'}
   ${buttonMixin}
 `;
 
-const RightButton = styled.button`
+const RightButton = styled.div`
   margin-left: auto;
   text-align: right;
   visibility: ${props => props.hide ? 'hidden;' : 'visible;'}

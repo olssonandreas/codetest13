@@ -28,6 +28,7 @@ const Header = styled.div`
   background-color: green;
   img {
     width: 100px;
+    height: 100%;
     border: 1px solid transparent;
     &:focus {
       outline: none;

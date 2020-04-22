@@ -6,11 +6,14 @@ import Image from './Image';
 import Social from './Social';
 
 const Card = styled.div`
-  flex-basis: 100%;
   height: 400px;
   display: flex;
+  max-width: 100%;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: 100%;
   align-items: center;
-  flex-flow: column;
+  flex-flow: column wrap;
   border-radius: 3px;
   background-color: white;
   padding: 20px;
@@ -18,6 +21,7 @@ const Card = styled.div`
   border: 1px solid rgba(0,0,0, 0.3);
 
   @media ${device.tablet} {
+    max-width: calc(50% - 10px);
     flex-basis: calc(50% - 10px);
     margin-right: 20px;
     &:nth-of-type(2n) {
@@ -26,6 +30,7 @@ const Card = styled.div`
   }
 
   @media ${device.laptop} {
+    max-width: calc(25% - 15px);
     flex-basis: calc(25% - 15px);
     margin-right: 20px;
     &:nth-of-type(2n) {

@@ -36,4 +36,4 @@ To run production application code in docker you can use docker-compose<br>
 
 ## Test
 
-`npm run test`in root directory to run testrunner for componenet and function tests
+`npm run test` in root directory to run testrunner for componenet and function tests

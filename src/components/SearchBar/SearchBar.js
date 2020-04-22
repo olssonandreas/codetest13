@@ -5,7 +5,7 @@ import { useDebounce } from 'utils';
 const SearchBar = styled.input`
   height: 80px;
   width: 100%;
-  border: 1px solid green;
+  border: 1px solid rgba(0,0,0,0.3);
   font-size: 20px;
   color: #000;
   font-family: 'Quicksand', sans-serif;
@@ -21,7 +21,8 @@ const SearchBar = styled.input`
   }
 
   &:focus {
-    outline: 1px solid green;
+    outline: none;
+    border: 1px solid green;
   }
 `;
 

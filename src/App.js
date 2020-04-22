@@ -23,11 +23,16 @@ const Header = styled.div`
   position: sticky;
   top: 0;
   align-items: center;
+  padding-left: 20px;
   height: 60px;
   background-color: green;
-  padding: 20px;
   img {
     width: 100px;
+    border: 1px solid transparent;
+    &:focus {
+      outline: none;
+      border-color: white;
+    }
   }
 `;
 

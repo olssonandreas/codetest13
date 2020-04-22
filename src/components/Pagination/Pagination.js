@@ -53,7 +53,7 @@ export default ({ goBack, goNext, page, items, pageAmount }) => {
   return (
     <PaginationWrapper data-testid="pagination">
       <LeftButton
-        tabIndex="7"
+        tabIndex="9"
         onKeyDown={(event) => event.keyCode === '13' ? goBack() : null}
         hide={page === 0}
         onClick={goBack}>
@@ -61,7 +61,7 @@ export default ({ goBack, goNext, page, items, pageAmount }) => {
       </LeftButton>
       <PageCounter data-testid="counter">{ page + 1 } / { pageLength }</PageCounter>
       <RightButton
-        tabIndex="8"
+        tabIndex="10"
         hide={page + 1 === pageLength}
         onClick={goNext}
         onKeyDown={(event) => event.keyCode === '13' ? goNext() : null}>

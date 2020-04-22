@@ -7,6 +7,7 @@ const SortHeader = styled.div`
   text-align: center;
   font-size: 12px;
   margin-bottom: 10px;
+
   @media ${device.laptop} {
     margin-left: auto;
     width: 300px;
@@ -26,7 +27,7 @@ const SortByWrapper = styled.div`
  const SortOptions = styled.div`
   display: flex;
   flex-flow: row;
-  border: 1px solid green;
+  border: 1px solid rgba(0,0,0,0.3);
   border-radius: 3px;
   width: 100%;
   margin-bottom: 20px;
@@ -44,10 +45,14 @@ const SortOption = styled.button`
   background-color: ${props => props.active ? 'green;' : 'transparent;'};
   font-family: 'Quicksand', sans-serif;
   &:focus {
-    outline: 2px solid green;
+    outline: none;
+    border: 1px solid green;
   }
   &:nth-of-type(2n) {
-    border-left: 1px solid green;
+    border-left: 1px solid rgba(0,0,0,0.2);
+    &:focus {
+      border-color: green;
+    }
   }
 `;
 

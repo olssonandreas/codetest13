@@ -13,7 +13,12 @@ const Card = styled.div`
   border-radius: 3px;
   background-color: white;
   padding: 20px;
-  border: 1px solid rgba(0,0,0, 0.2);
+  border: 1px solid rgba(0,0,0, 0.3);
+
+  &:focus {
+    outline: none;
+    border-color: green;
+  }
 `;
 
 const Text = styled.div`
@@ -21,9 +26,9 @@ const Text = styled.div`
   margin-top: 10px;
 `;
 
-export default ({ name, imagePortraitUrl, office, gitHub, linkedIn, twitter }) => {
+export default ({ name, tabIndex, imagePortraitUrl, office, gitHub, linkedIn, twitter }) => {
   return (
-    <Card>
+    <Card tabIndex={tabIndex}>
       <Image name={name} imagePortraitUrl={imagePortraitUrl} ></Image>
       <Text>{ name }</Text>
       <Text>{ office }</Text>

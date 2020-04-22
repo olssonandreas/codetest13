@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { device } from 'utils';
 
 import Image from './Image';
 import Social from './Social';
 
-const Card = styled.div`
+const CardWrapper = styled.div`
   height: 400px;
   display: flex;
   max-width: 100%;
@@ -51,13 +52,25 @@ const Text = styled.div`
   margin-top: 10px;
 `;
 
-export default ({ name, tabIndex, imagePortraitUrl, office, gitHub, linkedIn, twitter }) => {
+const Card = ({ name, tabIndex, imagePortraitUrl, office, gitHub, linkedIn, twitter }) => {
   return (
-    <Card tabIndex={tabIndex}>
-      <Image name={name} imagePortraitUrl={imagePortraitUrl} ></Image>
-      <Text>{ name }</Text>
-      <Text>{ office }</Text>
-      <Social gitHub={gitHub} twitter={twitter} linkedIn={linkedIn} />
-    </Card>
+  <CardWrapper tabIndex={tabIndex}>
+    <Image name={name} imagePortraitUrl={imagePortraitUrl} ></Image>
+    <Text>{ name }</Text>
+    <Text>{ office }</Text>
+    <Social gitHub={gitHub} twitter={twitter} linkedIn={linkedIn} />
+  </CardWrapper>
   );
 };
+
+Card.propTypes = {
+  name: PropTypes.string,
+  tabIndex: PropTypes.string,
+  imagePortraitUrl: PropTypes.string,
+  office: PropTypes.string,
+  github: PropTypes.string,
+  linkedIn: PropTypes.string,
+  twitter: PropTypes.string,
+};
+
+export default Card;

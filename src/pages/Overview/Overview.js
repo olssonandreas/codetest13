@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { sort } from 'utils';
 
 import CardList from 'components/CardList';
@@ -79,6 +80,10 @@ const Overview = props => {
     />
   </div>
   );
+};
+
+Overview.propTypes = {
+  fetchedData: PropTypes.array,
 };
 
 export default Overview;

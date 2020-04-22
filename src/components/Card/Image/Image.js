@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import placeholder from './placeholder.png';
 
@@ -10,20 +11,26 @@ const ImageWrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-const Image = styled.img`
+const Photo = styled.img`
   width: 149px;
   height: 199px;
   display: block;
   margin: 0 auto;
 `;
 
-export default ({ imagePortraitUrl, name }) => {
-  // TODO
+const Image = ({ imagePortraitUrl, name }) => {
   if (!imagePortraitUrl) return <img src={placeholder} alt="placeholder"></img>
 
   return (
-    <ImageWrapper>
-      <Image alt={`Photo off ${name}`} src={imagePortraitUrl}></Image>
-      </ImageWrapper>
+  <ImageWrapper>
+    <Photo alt={`Photo off ${name}`} src={imagePortraitUrl}></Photo>
+  </ImageWrapper>
   );
 };
+
+Image.propTypes = {
+  imagePortraitUrl: PropTypes.string,
+  name: PropTypes.string,
+};
+
+export default Image;

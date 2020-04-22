@@ -7,9 +7,8 @@ import {
   Link,
 } from "react-router-dom";
 
-import logo from 'assets/logo.svg';
-
 import Overview from './pages/Overview';
+import logo from 'assets/logo.svg';
 
 const Container = styled.div`
   display: flex;
@@ -39,15 +38,18 @@ const Header = styled.div`
 
 export default () => {
   return (
-    <Router>
-      <Header><Link to="/"><img src={logo} alt="logo"></img></Link></Header>
-      <Container>
-        <Switch>
-          <Route path="/">
-            <Overview />
-          </Route>
-        </Switch>
-      </Container>
-    </Router>
+  <Router>
+    <Header>
+      <Link to="/"><img src={logo} alt="logo"></img>
+      </Link>
+    </Header>
+    <Container>
+      <Switch>
+        <Route path="/">
+          <Overview />
+        </Route>
+      </Switch>
+    </Container>
+  </Router>
   );
 };

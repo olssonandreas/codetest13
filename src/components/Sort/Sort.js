@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { device } from 'utils';
 
@@ -56,7 +57,7 @@ const SortOption = styled.button`
   }
 `;
 
-export default ({ sortBy, clearSort }) => {
+const Sort = ({ sortBy, clearSort }) => {
   const [activeSort, setActiveSort] = useState(null);
 
   const sort = event => {
@@ -71,7 +72,7 @@ export default ({ sortBy, clearSort }) => {
   };
 
   return (
-    <SortByWrapper>
+  <SortByWrapper>
     <SortHeader>Sort by</SortHeader>
     <SortOptions>
       <SortOption
@@ -91,6 +92,13 @@ export default ({ sortBy, clearSort }) => {
         Office
       </SortOption>
     </SortOptions>
-    </SortByWrapper>
+  </SortByWrapper>
   );
 };
+
+Sort.propTypes = {
+  sortBy: PropTypes.func,
+  clearSort: PropTypes.func,
+};
+
+export default Sort;

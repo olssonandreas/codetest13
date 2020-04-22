@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Card from 'components/Card';
@@ -8,12 +9,18 @@ const CardWrapper = styled.div`
   flex-flow: wrap;
 `;
 
-export default ({ cardItems }) => {
+const CardList = ({ cardItems }) => {
   return (
     <CardWrapper>
-    { cardItems.map((m,index) =>
+    { cardItems.length ? cardItems.map((m,index) =>
       <Card tabIndex="6" key={index} {...m}/>
-    )}
+    ) : 'Search resulted in 0 hits' }
   </CardWrapper>
   );
 };
+
+CardList.propTypes = {
+  cardItems: PropTypes.array,
+};
+
+export default CardList;

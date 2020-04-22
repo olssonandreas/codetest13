@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { calcPageLength } from 'utils';
@@ -41,31 +42,40 @@ const PageCounter = styled.div`
   font-size: 14px;
 `;
 
-export default ({ goBack, goNext, page, items, pageAmount }) => {
-  if(items <= pageAmount) return null;
-
+const Pagination = ({ goBack, goNext, page, items, pageAmount }) => {
   const pageLength = useMemo(() => {
     return calcPageLength(items, pageAmount);
   },[items, pageAmount]);
 
+  if(items <= pageAmount) return null;
 
   return (
-    <PaginationWrapper data-testid="pagination">
-      <LeftButton
-        tabIndex="9"
-        onKeyDown={(event) => event.keyCode === '13' ? goBack() : null}
-        hide={page === 0}
-        onClick={goBack}>
-        Previous page
-      </LeftButton>
-      <PageCounter data-testid="counter">{ page + 1 } / { pageLength }</PageCounter>
-      <RightButton
-        tabIndex="10"
-        hide={page + 1 === pageLength}
-        onClick={goNext}
-        onKeyDown={(event) => event.keyCode === '13' ? goNext() : null}>
-        Next page
-      </RightButton>
-    </PaginationWrapper>
+  <PaginationWrapper data-testid="pagination">
+    <LeftButton
+      tabIndex="9"
+      onKeyDown={(event) => event.keyCode === '13' ? goBack() : null}
+      hide={page === 0}
+      onClick={goBack}>
+      Previous page
+    </LeftButton>
+    <PageCounter data-testid="counter">{ page + 1 } / { pageLength }</PageCounter>
+    <RightButton
+      tabIndex="10"
+      hide={page + 1 === pageLength}
+      onClick={goNext}
+      onKeyDown={(event) => event.keyCode === '13' ? goNext() : null}>
+      Next page
+    </RightButton>
+  </PaginationWrapper>
   );
 };
+
+Pagination.propTypes = {
+  goBack: PropTypes.func,
+  goNext: PropTypes.func,
+  page: PropTypes.number,
+  items: PropTypes.number,
+  pageAmount: PropTypes.number,
+};
+
+export default Pagination;

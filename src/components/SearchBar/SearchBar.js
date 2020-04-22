@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useDebounce } from 'utils';
 
-const SearchBar = styled.input`
+const SearchBarInput = styled.input`
   height: 80px;
   width: 100%;
   border: 1px solid rgba(0,0,0,0.3);
@@ -26,7 +27,7 @@ const SearchBar = styled.input`
   }
 `;
 
-export default ({ searchValue, clearSearch }) => {
+const SearchBar = ({ searchValue, clearSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
@@ -42,6 +43,13 @@ export default ({ searchValue, clearSearch }) => {
     }, [debouncedSearchTerm]);
 
   return (
-    <SearchBar tabIndex="1" onChange={search} value={searchTerm} placeholder="Search for name or office"></SearchBar>
+  <SearchBarInput tabIndex="1" onChange={search} value={searchTerm} placeholder="Search for name or office"></SearchBarInput>
   );
 };
+
+SearchBar.propTypes = {
+  searchValue: PropTypes.func,
+  clearSearch: PropTypes.func,
+};
+
+export default SearchBar;

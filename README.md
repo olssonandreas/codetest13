@@ -1,26 +1,35 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Quick start guide
 
-In the project directory, you can run:
+#### env
+add `.env` file in root directory with
+`NODE_PATH="src"`
 
-### `npm start`
+This command sets webpack to use absolute imports starting from the `src` directory.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+##### run application in dev mode?
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+`npm install` in root to install all dependencies
+`npm run start` to run react application on http://localhost:3000 with webpack hotreload when any changes occur in the code
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### run production build of application code?
+`npm run build` in root directory builds the app for production to the ./build folder
+`cd api/`
+`npm install` install dependencies for webserver
+`npm run start` run webserver on http://localhost:5000
 
-### `npm build`
+#### Docker
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To run production application code in docker you can use docker-compose
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+`docker-compose up -d --build`
+
+`-d` run in detached mode (run containers in background)
+`--build` Builds docker images before starting the container
+
+
+## Test
+
+`npm run test`in root directory to run testrunner for componenet and function tests
